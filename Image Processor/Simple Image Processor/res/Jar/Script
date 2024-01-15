@@ -1,0 +1,39 @@
+load res/Donkey.ppm Donkey
+flip-horizontal Donkey Donkey-horizontal
+save res/Flipped/Donkey-horizontal.ppm Donkey-horizontal
+
+load res/Donkey.ppm Donkey
+flip-vertical Donkey Donkey-vertical
+save res/Flipped/Donkey-vertical.ppm Donkey-vertical
+
+load res/Donkey.ppm Donkey
+brighten 20 Donkey Donkey-brightened
+save res/Flipped/Donkey-brightened.ppm Donkey-brightened
+
+load res/Donkey.ppm Donkey
+darken 20 Donkey Donkey-darkened
+save res/Flipped/Donkey-darkened.ppm Donkey-darkened
+
+load res/Donkey.ppm Donkey
+red-component Donkey Donkey-red.greyscale
+save res/Flipped/Donkey-red.greyscale.ppm Donkey-red.greyscale
+
+load res/Donkey.ppm Donkey
+green-component Donkey Donkey-green.greyscale
+save res/Flipped/Donkey-green.greyscale.ppm Donkey-green.greyscale
+
+load res/Donkey.ppm Donkey
+blue-component Donkey Donkey-blue.greyscale
+save res/Flipped/Donkey-blue.greyscale.ppm Donkey-blue.greyscale
+
+load res/Donkey.ppm Donkey
+value-component Donkey Donkey-value.greyscale
+save res/Flipped/Donkey-value.greyscale.ppm Donkey-value.greyscale
+
+load res/Donkey.ppm Donkey
+intensity-component Donkey Donkey-intensity.greyscale
+save res/Flipped/Donkey-intensity.greyscale.ppm Donkey-intensity.greyscale
+
+load res/Donkey.ppm Donkey
+luma-component Donkey Donkey-luma.greyscale
+save res/Flipped/Donkey-luma.greyscale.ppm Donkey-luma.greyscale

@@ -1,0 +1,37 @@
+GUIController:
+
+- Open Button
+    Opens a file chooser window.
+    User should pick a file click "open" button
+
+- Save Button
+    Opens a file chooser window.
+    User should select where they want to save the image
+    Naming:
+        Files have to be named in the format OLD_IMAGE_NAME-COMMAND_PERFORMED.
+
+- Brighten Button
+    Opens a pop up window that prompts the user to insert degree of brightening.
+        A positive input brightens the image.
+        A negative input darkens the image.
+
+- Clarity Button and Menu
+    Select from the scroll menu whether to perform blur or sharpen.
+    Once selected, click the Clarity button.
+
+- Flip Button and Menu
+     Select from the scroll menu whether to perform vertical flip or horizontal flip.
+     Once selected, click the Flip button.
+
+- Greyscale Button and Menu
+     Select from the scroll menu whether to perform sepia or greyscale.
+     Once selected, click the Greyscale button.
+
+- Visualize Button and Menu
+     Select from the scroll menu whether to perform red-component, blue-component, green-component
+     luma-component, intensity-component, value-component.
+     Once selected, click the Greyscale button.
+
+- Guide Button gives a similar explanation to the USEME. It also tells the user how to name the
+     images in order for the program to save them correctly.
+----------------------------------------------------------------------------------------------------

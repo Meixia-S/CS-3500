@@ -1,0 +1,145 @@
+11/23/2022
+----------------------------------------------------------------------------------------------------
+OOD Assignment 6
+By: Meixia Sindelar and Moises Micha
+----------------------------------------------------------------------------------------------------
+Image Credit: Donkey.jpg and BlurandSharpen.jpg is a photo taken/made by me(Meixia).
+              I fully authorize the use of the photos for the OOD assigment.
+----------------------------------------------------------------------------------------------------
+Example Script of Commands the Program Accepts:
+
+ImageProcessController:
+
+Image Format Supported: ppm, png, jpg, and bmp.
+
+-------------------------------------------------
+ Format:                                        |
+   load: imagePath         imageName            |
+command: oldName           updated-imageName    |
+   save: updated-imagePath updated-imageName    |
+-------------------------------------------------
+
+load res/Donkey.ppm Donkey
+save res/Donkey.ppm Donkey
+
+brighten 20 Donkey Donkey-brightened
+save res/Brightness/Donkey-brightened.ppm Donkey-brightened
+
+darken 20 Donkey Donkey-darkened
+save res/Brightness/Donkey-darkened.ppm Donkey-darkened
+
+flip-horizontal Donkey Donkey-horizontal
+save res/Flipped/Donkey-horizontal.ppm Donkey-horizontal
+
+flip-vertical Donkey Donkey-vertical
+save res/Flipped/Donkey-vertical.ppm Donkey-vertical
+
+red-component Donkey-horizontal Donkey-horizontal-red.greyscale
+save res/Flipped/Donkey-horizontal-red.greyscale.ppm Donkey-horizontal-red.greyscale
+
+green-component Donkey Donkey-green.greyscale
+save res/Greyscale/Donkey-green.greyscale.ppm Donkey-green.greyscale
+
+blue-component Donkey Donkey-blue.greyscale
+save res/Greyscale/Donkey-blue.greyscale.ppm Donkey-blue.greyscale
+
+luma-component Donkey Donkey-luma.greyscale
+save res/Greyscale/Donkey-luma.greyscale.ppm Donkey-luma.greyscale
+
+intensity-component Donkey Donkey-intensity.greyscale
+save res/Greyscale/Donkey-intensity.greyscale.pp, Donkey-intensity.greyscale
+
+value-component Donkey-vertical Donkey-vertical-value.greyscale
+save res/Flipped/Donkey-vertical-value.greyscale.ppm Donkey-vertical-value.greyscale
+
+blur Donkey Donkey-blur
+save res/Clarity/Donkey-blur.png Donkey-blur
+
+sharpen Donkey Donkey-sharpen
+save res/Clarity/Donkey-sharpen.jpg Donkey-sharpen
+
+greyscale Donkey Donkey-greyscale
+save res/Greyscale/Donkey-greyscale.ppm Donkey-greyscale
+
+sepia Donkey Donkey-sepia
+save res/Greyscale/Donkey-sepia.bmp Donkey-sepia
+
+// Images are saved in the folder of their first edit (Donkey-vertical-darkened is in Flipped)
+// https://www.cs.rhodes.edu/welshc/COMP141_F16/ppmReader.html
+----------------------------------------------------------------------------------------------------
+Intro:
+*Please update this section and complete the other things listed on the assignment*
+
+A quick version of what is below is the Controller takes in user input, determines which command it
+is, then it either calls the LoadImage class, SaveImage class, or the Model. The image is then
+loaded, saved, or a command is executed upon the desired image. All images are saved in a file and
+the Hashmap housed in the Model class. The Controller has a method that takes the place of the view
+in the fact it print messages to the user to update it on the process of the image. This is the
+general summary of what the program does and how the program is organized.
+-------------------------------------------------
+Model Package:
+
+This houses many of the important classes form ones  that define what an image and pixel is, adding
+and retrieving images from the Model's Hashmap, to being responsible for calling the classes and
+methods the Command package has. It is the heart of the program. To break this down further, the
+Pixel class holds the information each Pixel in the Image has. It also has methods that allow other
+classes in the program to get information about the rgb values and the col and row of the individual
+Pixel. The Image class has a similar function as it allows other classes to get information about
+the image from the 2D array of Pixels, a Pixel at a specific, row, col, and max value. The Model
+class itself is structured via the interface that allows it to do the before mentioned tasks. It's
+main purpose is to direct commands to the correct Image and then save those edited images.
+--------------------------
+Commands Package:
+
+This package is centered around the interface that has the singular method, execute. As its name
+suggests, it executes any command or editing the user wishes to do to an image. The package also
+contains all the classes that implement the interface. Each class represents a type of editing, like
+flipping an image or adjusting the brightness. Each execute method takes in an image and returns a
+new one with the desired editing done to it. Due to the fact multiple editing commands are housed in
+one class, both Visualization, Greyscale and Clarity take in a String and FlipImage takes in a
+boolean. By doing this, the number of classes in the Commands package is decreased and code
+repetition is minimized. For this assignment the package is within the Model package as it is only
+called upon there as the run method in the controller interface returns void. Having it in the
+current location makes it easy to execute a certain command on a particular image as we have direct
+access to the stored images and can return nothing which pairs well with the controller. This worked
+out for future assignments as we use a different controller to host the GUI view and do not need to
+use delegation. We simple can "abandon" the old controller and solely use the new one.
+-------------------------------------------------
+View Package:
+
+The view package creates the windows and panels that makeup the graphical user interface. The
+Histogram class that extends JPanel creates three histograms-one for each rgb value. The view class
+itself extends JFrame and implements ActionListener and an interface. The interface's methods are
+used to help in loading and saving an image, refresh the imagePanel, and display messages to the
+user. The ActionListener is used to connect the action of clicking a button with the commands. This
+is where most of the interactions between the model, view, and controller are. Before explaining
+further, it should be noted that the methods in the interface cannot be preformed by the other
+packages since they need the library methods inorder to interact with GUI operations. The view takes
+in user input in the forms of clicking of buttons, drop-down lists selections, and JOptionPane
+input. This information is then passed to the controller where the inputs are plugged into the
+appropriate model package class and methods. The results of those methods are passed back to the
+view so it imagePanel can be updated and show the edited image. It can then be edited further or be
+saved as a new image.
+-------------------------------------------------
+Controller Package:
+
+This is another vital part of the program as it takes in user input, parse those inputs in a way the
+Model and it's Commands package classes can understand, then determines if the input is indeed a
+"KnownCommand" before calling upon the Model to run the command. The package also houses the classes
+that deal with loading and saving the images, LoadImage and SaveImage respectably. The reason these
+two classes are in this particular package is due to the fact they do not take in and return the
+same objects as ICommand classes do. They are also only ever called by the Controller class so it
+takes in the same package. The imageUtil class is only used by the LoadImage class.
+
+A second controller, GUIController, was made inorder to support the GUI view and it's operations. It
+takes in the model and view. Unlike the other controller's interface, the GUI interface has many
+methods that represent each operation that is supported by the program. This is done by taking
+inputs from the view and calling the corresponding ICommand class through the model. As mentioned
+before, the decision to have the command call through the model class instead of the controller has
+allowed for complete separation from the former controller. There is one helper method that makes
+checking if any of the three inputs easier and minimizes code repetition.
+----------------------------------------------------------------------------------------------------
+We did not change any of the previous code we had. The only true justifications of design is that
+we made a histogram class for organizational purposes. Everything except displaying the histogram
+is up and running.
+----------------------------------------------------------------------------------------------------
